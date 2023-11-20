@@ -5,7 +5,6 @@ const moment = require('moment');
 const db = require('../db');
 
 /** A reservation for a party */
-
 class Reservation {
     constructor({ id, customerId, numGuests, startAt, notes }) {
         this.id = id;
@@ -16,13 +15,11 @@ class Reservation {
     }
 
     /** formatter for startAt */
-
     getformattedStartAt() {
         return moment(this.startAt).format('MMMM Do YYYY, h:mm a');
     }
 
     /** given a customer id, find their reservations. */
-
     static async getReservationsForCustomer(customerId) {
         const results = await db.query(
             `SELECT id,
