@@ -45,8 +45,6 @@ class Customer {
             throw err;
         }
 
-        console.log(results.rows[0]);
-
         const customer = results.rows[0];
         return new Customer(customer);
     }
