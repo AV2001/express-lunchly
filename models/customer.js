@@ -31,6 +31,26 @@ class Customer {
         return results.rows.map((c) => new Customer(c));
     }
 
+    // find customers by name.
+    static async getByName(name) {
+        const results = await db.query(
+            `SELECT id, first_name AS "firstName", last_name AS "lastName", phone, notes FROM customers
+             WHERE LOWER(first_name) = $1`,
+            [name.toLowerCase()]
+        );
+
+        if (results.rows.length === 0) {
+            const err = new Error(`There's no customer with the name: ${name}`);
+            err.status = 404;
+            throw err;
+        }
+
+        console.log(results.rows[0]);
+
+        const customer = results.rows[0];
+        return new Customer(customer);
+    }
+
     /** get a customer by ID. */
     static async get(id) {
         const results = await db.query(
