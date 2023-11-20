@@ -16,6 +16,19 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+// Search: search for a particular user based on their name.
+router.get('/search', async (req, res, next) => {
+    try {
+        const { name } = req.query;
+        if (name) {
+            const customer = await Customer.getByName(name);
+            return res.render('customer_list.html', { customer });
+        }
+    } catch (err) {
+        return next(err);
+    }
+});
+
 /** Form to add a new customer. */
 router.get('/add/', async function (req, res, next) {
     try {
