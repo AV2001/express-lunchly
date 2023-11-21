@@ -29,6 +29,16 @@ router.get('/search', async (req, res, next) => {
     }
 });
 
+// Top 10: get the top 10 users with most reservations
+router.get('/top-10', async (req, res, next) => {
+    try {
+        const customers = await Customer.getTopTenCustomersByReservations();
+        return res.json(customers);
+    } catch (err) {
+        return next(err);
+    }
+});
+
 /** Form to add a new customer. */
 router.get('/add/', async function (req, res, next) {
     try {
