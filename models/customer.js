@@ -51,6 +51,22 @@ class Customer {
         return customers;
     }
 
+    // finds top 10 customers by reservations
+    static async getTopTenCustomersByReservations() {
+        const results = await db.query(
+            `
+            SELECT c.id AS "id", c.first_name AS "firstName", c.last_name AS "lastName", c.phone AS "phone", c.notes AS "notes", COUNT(r.customer_id) AS num_reservations FROM customers c JOIN reservations r ON c.id = r.customer_id GROUP BY c.id ORDER BY num_reservations DESC LIMIT 10;
+            `
+        );
+
+        const customers = results.rows.map((customer) => {
+            const { id, firstName, lastName, phone, notes } = customer;
+            return new Customer({ id, firstName, lastName, phone, notes });
+        });
+
+        return customers;
+    }
+
     /** get a customer by ID. */
     static async get(id) {
         const results = await db.query(
