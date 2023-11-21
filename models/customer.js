@@ -39,14 +39,18 @@ class Customer {
             [name.toLowerCase()]
         );
 
+        console.log(results.rows);
+
         if (results.rows.length === 0) {
             const err = new Error(`There's no customer with the name: ${name}`);
             err.status = 404;
             throw err;
         }
 
-        const customer = results.rows[0];
-        return new Customer(customer);
+        const customers = results.rows.map(
+            (customer) => new Customer(customer)
+        );
+        return customers;
     }
 
     /** get a customer by ID. */
