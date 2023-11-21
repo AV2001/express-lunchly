@@ -10,7 +10,7 @@ class Reservation {
         this.id = id;
         this.customerId = customerId;
         this._numGuests = numGuests;
-        this.startAt = startAt;
+        this._startAt = startAt;
         this.notes = notes;
     }
 
@@ -25,6 +25,19 @@ class Reservation {
             throw new Error('Number of guests must be at least 1.');
         }
         this._numGuests = val;
+    }
+
+    // Getter for startAt
+    get startAt() {
+        return this._startAt;
+    }
+
+    // Setter for startAt
+    set startAt(val) {
+        if (!(val instanceof Date)) {
+            throw new Error('startAt must be a Date object.');
+        }
+        this._startAt = val;
     }
 
     /** formatter for startAt */
