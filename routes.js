@@ -21,8 +21,8 @@ router.get('/search', async (req, res, next) => {
     try {
         const { name } = req.query;
         if (name) {
-            const customer = await Customer.getByName(name);
-            return res.render('customer_list.html', { customer });
+            const customers = await Customer.getByName(name);
+            return res.render('customer_list.html', { customers });
         }
     } catch (err) {
         return next(err);
