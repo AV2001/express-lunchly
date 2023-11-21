@@ -9,9 +9,22 @@ class Reservation {
     constructor({ id, customerId, numGuests, startAt, notes }) {
         this.id = id;
         this.customerId = customerId;
-        this.numGuests = numGuests;
+        this._numGuests = numGuests;
         this.startAt = startAt;
         this.notes = notes;
+    }
+
+    // Getter for numGuests
+    get numGuest() {
+        return this._numGuests;
+    }
+
+    // Setter for numGuests
+    set numGuests(val) {
+        if (val < 1) {
+            throw new Error('Number of guests must be at least 1.');
+        }
+        this._numGuests = val;
     }
 
     /** formatter for startAt */
