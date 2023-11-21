@@ -7,13 +7,9 @@
 <h1>Customers</h1>
 
 <ul style="column-count: 4">
-  {% if not customers %}
-  <p><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></p>
-  {% else %}
   {% for customer in customers %}
   <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
   {% endfor %}
-  {% endif %}
 </ul>
 
 {% endblock %}
