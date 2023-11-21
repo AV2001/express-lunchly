@@ -39,8 +39,6 @@ class Customer {
             [name.toLowerCase()]
         );
 
-        console.log(results.rows);
-
         if (results.rows.length === 0) {
             const err = new Error(`There's no customer with the name: ${name}`);
             err.status = 404;
